@@ -39,8 +39,8 @@ def load_bert_model():
         with zipfile.ZipFile(output, 'r') as zip_ref:
             zip_ref.extractall(model_path)
 
-    model = BertForSequenceClassification.from_pretrained(model_path, local_files_only=True)
-    tokenizer = BertTokenizer.from_pretrained(model_path, local_files_only=True)
+    model = BertForSequenceClassification.from_pretrained(model_path)
+    tokenizer = BertTokenizer.from_pretrained(model_path)
     return model, tokenizer
 
 @st.cache_resource
@@ -74,8 +74,8 @@ st.set_page_config(page_title="Fake Review Detection", layout="wide")
 # Load BERT model/tokenizer
 @st.cache_resource
 def load_bert_model():
-    model = BertForSequenceClassification.from_pretrained("models", local_files_only=True)
-    tokenizer = BertTokenizer.from_pretrained("models", local_files_only=True)
+    model = BertForSequenceClassification.from_pretrained("models")
+    tokenizer = BertTokenizer.from_pretrained("models")
     return model, tokenizer
 
 stop_words = set(stopwords.words('english'))
