@@ -45,6 +45,8 @@ def load_bert_model():
 @st.cache_resource
 def load_metadata_model():
     model_path = "models/metadata"
+    scaler_path = "scaler/metadata_scaler.joblib"  # Direct path to scaler
+    vectorizer_path = "vectorizer/metadata_vectorizer.joblib"
 
     if not os.path.exists(model_path):
         os.makedirs(model_path, exist_ok=True)
@@ -53,9 +55,11 @@ def load_metadata_model():
         gdown.download(url, output, quiet=False)
         with zipfile.ZipFile(output, 'r') as zip_ref:
             zip_ref.extractall(model_path)
-
     model = joblib.load(os.path.join(model_path, "metadata_model.joblib"))
-    return model
+    scaler = joblib.load("scaler/metadata_scaler.joblib")
+    vectorizer = joblib.load("vectorizer/metadata_vectorizer.joblib")
+    
+    return model, scaler, vectorizer        
 
 
 # Suppress warnings
@@ -81,12 +85,12 @@ stop_words = set(stopwords.words('english'))
 sia = SentimentIntensityAnalyzer()
 
 # Load metadata model, scaler, vectorizer
-@st.cache_resource
-def load_metadata_model():
+#@st.cache_resource
+#def load_metadata_model():
  #   metadata_model = joblib.load("metadata_model/metadata_model.joblib")
-    scaler = joblib.load("scaler/metadata_scaler.joblib")
-    vectorizer = joblib.load("vectorizer/metadata_vectorizer.joblib")
-    return scaler, vectorizer
+ #   scaler = joblib.load("scaler/metadata_scaler.joblib")
+  #  vectorizer = joblib.load("vectorizer/metadata_vectorizer.joblib")
+   # return scaler, vectorizer
 
 # Extract metadata features
 def extract_metadata_features(text):
