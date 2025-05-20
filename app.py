@@ -23,7 +23,6 @@ import textstat
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pandas as pd
 import os
-import gdown
 import zipfile
 
 # --- Load models with caching ---
