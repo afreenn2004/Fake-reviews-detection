@@ -24,7 +24,6 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pandas as pd
 import os
 import zipfile
-import gdown
 
 # --- Load models with caching ---
 @st.cache_resource
