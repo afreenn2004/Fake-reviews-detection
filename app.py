@@ -154,6 +154,25 @@ metadata_model = load_metadata_model()
 # Main app
 def main():
 
+        # 1. Upload the model file
+    uploaded_model = st.file_uploader("Upload metadata_model.joblib", type="joblib")
+    if uploaded_model is not None:
+        # Save uploaded model to disk
+        model_path = "models/metadata_model.joblib"
+        os.makedirs("models", exist_ok=True)
+        with open(model_path, "wb") as f:
+            f.write(uploaded_model.read())
+        st.success("Model uploaded successfully!")
+
+        # Load uploaded model
+        metadata_model = joblib.load(model_path)
+    else:
+        # Load pre-existing model normally
+        metadata_model, scaler, vectorizer = load_metadata_model()
+
+    # Load bert model/tokenizer as before
+    bert_model, bert_tokenizer = load_bert_model()
+
 
     st.title("🧠 Fake Review Detection System")
     st.markdown("Enter a product review to determine if it's **Fake** or **Genuine**.")
