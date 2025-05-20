@@ -24,6 +24,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pandas as pd
 import os
 import zipfile
+import gdown
 
 # --- Load models with caching ---
 @st.cache_resource
@@ -38,8 +39,8 @@ def load_bert_model():
         with zipfile.ZipFile(output, 'r') as zip_ref:
             zip_ref.extractall(model_path)
 
-    model = BertForSequenceClassification.from_pretrained(model_path)
-    tokenizer = BertTokenizer.from_pretrained(model_path)
+    model = BertForSequenceClassification.from_pretrained("bert-base-uncased")
+    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
     return model, tokenizer
 
 @st.cache_resource
