@@ -71,11 +71,11 @@ nltk.download('vader_lexicon')
 st.set_page_config(page_title="Fake Review Detection", layout="wide")
 
 # Load BERT model/tokenizer
-@st.cache_resource
-def load_bert_model():
-    model = BertForSequenceClassification.from_pretrained("models")
-    tokenizer = BertTokenizer.from_pretrained("models")
-    return model, tokenizer
+#@st.cache_resource
+#def load_bert_model():
+ #   model = BertForSequenceClassification.from_pretrained("models")
+  #  tokenizer = BertTokenizer.from_pretrained("models")
+   # return model, tokenizer
 
 stop_words = set(stopwords.words('english'))
 sia = SentimentIntensityAnalyzer()
@@ -83,10 +83,10 @@ sia = SentimentIntensityAnalyzer()
 # Load metadata model, scaler, vectorizer
 @st.cache_resource
 def load_metadata_model():
-    metadata_model = joblib.load("metadata_model/metadata_model.joblib")
+ #   metadata_model = joblib.load("metadata_model/metadata_model.joblib")
     scaler = joblib.load("scaler/metadata_scaler.joblib")
     vectorizer = joblib.load("vectorizer/metadata_vectorizer.joblib")
-    return metadata_model, scaler, vectorizer
+    return scaler, vectorizer
 
 # Extract metadata features
 def extract_metadata_features(text):
